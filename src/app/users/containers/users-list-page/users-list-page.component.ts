@@ -14,13 +14,14 @@ export class UsersListPageComponent implements OnInit {
   error$: Observable<any>;
 
   constructor(private store: Store<fromRoot.RootState>,
-              private router: Router) {
+              private router: Router,
+              private userEffects: fromUsers.UsersEffects) {
   }
 
   ngOnInit() {
     this.users$ = this.store.select(fromUsers.getUsers);
-    this.loading$ = this.store.select(fromUsers.getUsersLoading);
     this.error$ = this.store.select(fromUsers.getUsersError);
+    this.loading$ = this.userEffects.usersLoading$;
     this.store.dispatch(new fromUsers.GetAllUsersAction());
   }
 

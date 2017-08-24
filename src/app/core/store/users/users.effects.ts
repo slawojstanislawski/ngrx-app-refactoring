@@ -3,6 +3,7 @@ import {Effect, Actions} from '@ngrx/effects';
 import {Observable} from 'rxjs/Observable';
 import {UsersBackend} from '../../../users/users.backend';
 import * as usersActions from './users.actions';
+import {createLoadingObservable} from '../store-utils';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
@@ -19,6 +20,15 @@ export class UsersEffects {
       .catch(error => Observable.of(new usersActions.GetAllUsersFailureAction(error)))
     );
 
+  @Effect({dispatch: false})
+  usersLoading$: Observable<boolean> = createLoadingObservable(
+    this.actions$,
+    usersActions.ActionTypes.GET_ALL_USERS,
+    [
+      usersActions.ActionTypes.GET_ALL_USERS_SUCCESS,
+      usersActions.ActionTypes.GET_ALL_USERS_FAILURE
+    ]);
+
   @Effect()
   getUserDetails$: Observable<usersActions.Actions> = this.actions$
     .ofType(usersActions.ActionTypes.GET_USER_DETAILS)
@@ -26,6 +36,15 @@ export class UsersEffects {
       .map((response) => new usersActions.GetUserDetailsSuccessAction(response))
       .catch(error => Observable.of(new usersActions.GetUserDetailsFailureAction(error)))
     );
+
+  @Effect({dispatch: false})
+  userDetailsLoading$: Observable<boolean> = createLoadingObservable(
+    this.actions$,
+    usersActions.ActionTypes.GET_USER_DETAILS,
+    [
+      usersActions.ActionTypes.GET_USER_DETAILS_SUCCESS,
+      usersActions.ActionTypes.GET_USER_DETAILS_FAILURE
+    ]);
 
   constructor(private actions$: Actions,
               private usersBackend: UsersBackend) {

@@ -17,15 +17,16 @@ export class DashboardPageComponent implements OnInit {
   userDetailsError$: Observable<any>;
 
   constructor(private store: Store<fromRoot.RootState>,
-              private router: Router) {
+              private router: Router,
+              private userEffects: fromUsers.UsersEffects) {
   }
 
   ngOnInit() {
     this.users$ = this.store.select(fromUsers.getUsers);
-    this.usersLoading$ = this.store.select(fromUsers.getUsersLoading);
+    this.usersLoading$ = this.userEffects.usersLoading$;
     this.usersError$ = this.store.select(fromUsers.getUsersError);
     this.userDetails$ = this.store.select(fromUsers.getUserDetails);
-    this.userDetailsLoading$ = this.store.select(fromUsers.getUserDetailsLoading);
+    this.userDetailsLoading$ = this.userEffects.userDetailsLoading$;
     this.userDetailsError$ = this.store.select(fromUsers.getUserDetailsError);
     this.store.dispatch(new fromUsers.GetUserDetailsAction(1));
     this.store.dispatch(new fromUsers.GetAllUsersAction());

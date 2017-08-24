@@ -15,12 +15,13 @@ export class UserDetailsPageComponent implements OnInit {
 
   constructor(private store: Store<fromRoot.RootState>,
               private route: ActivatedRoute,
-              private router: Router) {
+              private router: Router,
+              private userEffects: fromUsers.UsersEffects) {
   }
 
   ngOnInit() {
     this.userDetails$ = this.store.select(fromUsers.getUserDetails);
-    this.loading$ = this.store.select(fromUsers.getUserDetailsLoading);
+    this.loading$ = this.userEffects.userDetailsLoading$;
     this.error$ = this.store.select(fromUsers.getUserDetailsError);
     const userId = +this.route.snapshot.params['id'];
     this.store.dispatch(new fromUsers.GetUserDetailsAction(userId));
