@@ -20,8 +20,8 @@ export class UserDetailsPageComponent implements OnInit {
 
   ngOnInit() {
     this.userDetails$ = this.store.select(fromUsers.getUserDetails);
-    this.loading$ = this.store.select(fromUsers.getLoading);
-    this.error$ = this.store.select(fromUsers.getError);
+    this.loading$ = this.store.select(fromUsers.getUserDetailsLoading);
+    this.error$ = this.store.select(fromUsers.getUserDetailsError);
     const userId = +this.route.snapshot.params['id'];
     this.store.dispatch(new fromUsers.GetUserDetailsAction(userId));
   }

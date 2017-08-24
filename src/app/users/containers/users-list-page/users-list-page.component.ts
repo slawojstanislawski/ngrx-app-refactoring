@@ -19,8 +19,8 @@ export class UsersListPageComponent implements OnInit {
 
   ngOnInit() {
     this.users$ = this.store.select(fromUsers.getUsers);
-    this.loading$ = this.store.select(fromUsers.getLoading);
-    this.error$ = this.store.select(fromUsers.getError);
+    this.loading$ = this.store.select(fromUsers.getUsersLoading);
+    this.error$ = this.store.select(fromUsers.getUsersError);
     this.store.dispatch(new fromUsers.GetAllUsersAction());
   }
 

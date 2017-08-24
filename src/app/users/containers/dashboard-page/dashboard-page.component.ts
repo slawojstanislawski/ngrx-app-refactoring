@@ -10,19 +10,23 @@ import * as fromUsers from '../../../core/store/users';
 })
 export class DashboardPageComponent implements OnInit {
   users$: Observable<fromUsers.User[]>;
+  usersLoading$: Observable<boolean>;
+  usersError$: Observable<any>;
   userDetails$: Observable<fromUsers.User>;
-  loading$: Observable<boolean>;
-  error$: Observable<any>;
+  userDetailsLoading$: Observable<boolean>;
+  userDetailsError$: Observable<any>;
 
   constructor(private store: Store<fromRoot.RootState>,
               private router: Router) {
   }
 
   ngOnInit() {
-    this.userDetails$ = this.store.select(fromUsers.getUserDetails);
     this.users$ = this.store.select(fromUsers.getUsers);
-    this.loading$ = this.store.select(fromUsers.getLoading);
-    this.error$ = this.store.select(fromUsers.getError);
+    this.usersLoading$ = this.store.select(fromUsers.getUsersLoading);
+    this.usersError$ = this.store.select(fromUsers.getUsersError);
+    this.userDetails$ = this.store.select(fromUsers.getUserDetails);
+    this.userDetailsLoading$ = this.store.select(fromUsers.getUserDetailsLoading);
+    this.userDetailsError$ = this.store.select(fromUsers.getUserDetailsError);
     this.store.dispatch(new fromUsers.GetUserDetailsAction(1));
     this.store.dispatch(new fromUsers.GetAllUsersAction());
   }

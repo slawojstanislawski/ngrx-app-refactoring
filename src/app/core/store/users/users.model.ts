@@ -16,16 +16,20 @@ export class User implements IUser {
 
 export interface IUsersState {
   users: IUser[];
+  usersLoading: boolean;
+  usersError: any;
   userDetails: IUser;
-  loading: boolean;
-  error: any;
+  userDetailsLoading: boolean;
+  userDetailsError: any;
 }
 
 export class UsersState implements IUsersState {
   users: IUser[];
+  usersLoading: boolean;
+  usersError: any;
   userDetails: IUser;
-  loading: boolean;
-  error: any;
+  userDetailsLoading: boolean;
+  userDetailsError: any;
 
   constructor(currentState: IUsersState, newState: any) {
     Object.assign(this, currentState, newState);
@@ -34,7 +38,9 @@ export class UsersState implements IUsersState {
 
 export const initialUsersState: IUsersState = {
   users: [],
+  usersLoading: false,
+  usersError: null,
   userDetails: null,
-  loading: false,
-  error: null
+  userDetailsLoading: false,
+  userDetailsError: null
 };
