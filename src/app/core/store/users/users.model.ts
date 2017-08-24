@@ -1,3 +1,5 @@
+import {StateItem} from '../state.item';
+
 export interface IUser {
   id: number;
   firstName: string;
@@ -15,17 +17,13 @@ export class User implements IUser {
 }
 
 export interface IUsersState {
-  users: IUser[];
-  usersError: any;
-  userDetails: IUser;
-  userDetailsError: any;
+  users: StateItem<IUser[]>;
+  userDetails: StateItem<IUser>;
 }
 
 export class UsersState implements IUsersState {
-  users: IUser[];
-  usersError: any;
-  userDetails: IUser;
-  userDetailsError: any;
+  users: StateItem<IUser[]>;
+  userDetails: StateItem<IUser>;
 
   constructor(currentState: IUsersState, newState: any) {
     Object.assign(this, currentState, newState);
@@ -33,8 +31,6 @@ export class UsersState implements IUsersState {
 }
 
 export const initialUsersState: IUsersState = {
-  users: [],
-  usersError: null,
-  userDetails: null,
-  userDetailsError: null
+  users: new StateItem<IUser[]>().setData(null),
+  userDetails: new StateItem<IUser>().setData(null),
 };

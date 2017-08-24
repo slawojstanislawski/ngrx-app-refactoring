@@ -2,23 +2,23 @@
   <md-card-title>User Details</md-card-title>
   <md-card-content>
     <section>
-      <md-spinner *ngIf="(loading$ | async); else doneLoading"></md-spinner>
+      <md-spinner *ngIf="(userDetails$ | async).isLoading(); else doneLoading"></md-spinner>
       <ng-template #doneLoading>
-        <ng-container *ngIf="!(error$ | async); else error">
+        <ng-container *ngIf="!(userDetails$ | async).isFailure(); else error">
           <md-list>
             <md-list-item>
-              Id: {{(userDetails$ | async)?.id}}
+              Id: {{(userDetails$ | async).getData()?.id}}
             </md-list-item>
             <md-list-item>
-              First name: {{(userDetails$ | async)?.firstName}}
+              First name: {{(userDetails$ | async).getData()?.firstName}}
             </md-list-item>
             <md-list-item>
-              Last name: {{(userDetails$ | async)?.lastName}}
+              Last name: {{(userDetails$ | async).getData()?.lastName}}
             </md-list-item>
           </md-list>
         </ng-container>
         <ng-template #error>
-          <p>Error: {{(error$ | async)}}</p>
+          <p>Error: {{(userDetails$ | async).getError()}}</p>
         </ng-template>
       </ng-template>
     </section>

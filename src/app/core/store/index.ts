@@ -8,6 +8,6 @@ export const reducers = {
   users: reducer,
 };
 
-export const initialRootState: RootState = {
-  users: initialUsersState
-};
+export const initialRootState = (): RootState => ({
+    users: initialUsersState
+  });

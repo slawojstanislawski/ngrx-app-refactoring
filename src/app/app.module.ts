@@ -1,6 +1,6 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-import {StoreModule} from '@ngrx/store';
+import {INITIAL_STATE, StoreModule} from '@ngrx/store';
 import {EffectsModule} from '@ngrx/effects';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -19,7 +19,7 @@ import {StoreDevtoolsModule} from '@ngrx/store-devtools';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    StoreModule.forRoot(reducers, {initialState: initialRootState}),
+    StoreModule.forRoot(reducers, {initialState: <any>INITIAL_STATE}),
     StoreDevtoolsModule.instrument({
       maxAge: 25
     }),
@@ -31,7 +31,9 @@ import {StoreDevtoolsModule} from '@ngrx/store-devtools';
     BrowserAnimationsModule,
     MdToolbarModule
   ],
-  providers: [],
+  providers: [
+    {provide: INITIAL_STATE, useFactory: initialRootState}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

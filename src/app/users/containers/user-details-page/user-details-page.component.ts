@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {Observable} from 'rxjs/Observable';
 import {ActivatedRoute, Router} from '@angular/router';
+import {StateItem} from '../../../core/store/state.item';
 import * as fromRoot from '../../../core/store/index';
 import * as fromUsers from '../../../core/store/users';
 
@@ -9,20 +10,15 @@ import * as fromUsers from '../../../core/store/users';
   templateUrl: './user-details-page.component.html'
 })
 export class UserDetailsPageComponent implements OnInit {
-  userDetails$: Observable<fromUsers.User>;
-  loading$: Observable<boolean>;
-  error$: Observable<any>;
+  userDetails$: Observable<StateItem<fromUsers.User>>;
 
   constructor(private store: Store<fromRoot.RootState>,
               private route: ActivatedRoute,
-              private router: Router,
-              private userEffects: fromUsers.UsersEffects) {
+              private router: Router) {
   }
 
   ngOnInit() {
     this.userDetails$ = this.store.select(fromUsers.getUserDetails);
-    this.loading$ = this.userEffects.userDetailsLoading$;
-    this.error$ = this.store.select(fromUsers.getUserDetailsError);
     const userId = +this.route.snapshot.params['id'];
     this.store.dispatch(fromUsers.Actions.GET_USER_DETAILS(userId));
   }

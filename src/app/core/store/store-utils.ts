@@ -1,8 +1,3 @@
-import {Actions} from '@ngrx/effects';
-import {Observable} from 'rxjs/Observable';
-import 'rxjs/add/operator/mapTo';
-import 'rxjs/add/operator/merge';
-import 'rxjs/add/operator/publishReplay';
 import {UserAction} from './users/users.actions';
 
 const typeCache: {[label: string]: boolean} = {};
@@ -15,19 +10,6 @@ export function type<T>(label: T | ''): T {
 
   return <T>label;
 }
-
-export const createLoadingObservable = (actions: Actions, startActionType: string, finishActionTypes: string[]): Observable<boolean> => {
-  return actions
-    .ofType(startActionType)
-    .mapTo(true)
-    .merge(actions
-      .ofType(...finishActionTypes)
-      .mapTo(false)
-    )
-    .publishReplay(1)
-    .refCount();
-};
-
 
 function createAction(actionType: string, possibleTypes: { [key: string]: string }, payload): { type: string, payload: any } {
   return {
