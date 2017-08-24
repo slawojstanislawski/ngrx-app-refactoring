@@ -1,28 +1,21 @@
-# NgrxAppRefactoring
+# NgRx - a few ideas for boilerplate reduction / refactoring
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.4.0-beta.2.
+This application illustrates how one may attempt to reduce boilerplate inherent in NgRx apps.
 
-## Development server
+It is a companion repository to this article on Medium:
+https://medium.com/@slawojstanislawski/ngrx-app-refactoring-some-boilerplate-reduction-ideas-with-examples-22d53d4863f0
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+* The first commit is the inital commit of Angular CLI
+* The second commit is the initial application from which the refactoring starts
+* The third commit introduces the dashboard and illustrates the problem of shared error and loading state between components
+* The fourth commit tries to alleviate the problem, but creates more boilerplate in the long run
+* The fifth commit moves loading state properties into ngrx effects class
+* The sixth commit illustrates refactoring related to actions file
+* The seventh commit illustrates representing each state property wrapped with StateItem object
 
-## Code scaffolding
+## Try It!
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+* Clone the repository
+* Run `npm install`
+* Git-checkout the revision (the commit) you want to investigate
+* Run `npm start`
