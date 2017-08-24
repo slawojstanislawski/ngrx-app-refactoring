@@ -1,0 +1,3 @@
+<button md-button (click)="backToList()">Back to list</button>
+<app-users-list [users$]="users$" [loading$]="loading$" [error$]="error$"></app-users-list>
+<app-user-details [userDetails$]="userDetails$" [loading$]="loading$" [error$]="error$"></app-user-details>

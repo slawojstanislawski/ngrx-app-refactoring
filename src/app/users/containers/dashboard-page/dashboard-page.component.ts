@@ -6,10 +6,11 @@ import * as fromRoot from '../../../core/store/index';
 import * as fromUsers from '../../../core/store/users';
 
 @Component({
-  templateUrl: './users-list-page.component.html'
+  templateUrl: './dashboard-page.component.html'
 })
-export class UsersListPageComponent implements OnInit {
+export class DashboardPageComponent implements OnInit {
   users$: Observable<fromUsers.User[]>;
+  userDetails$: Observable<fromUsers.User>;
   loading$: Observable<boolean>;
   error$: Observable<any>;
 
@@ -18,13 +19,15 @@ export class UsersListPageComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.userDetails$ = this.store.select(fromUsers.getUserDetails);
     this.users$ = this.store.select(fromUsers.getUsers);
     this.loading$ = this.store.select(fromUsers.getLoading);
     this.error$ = this.store.select(fromUsers.getError);
+    this.store.dispatch(new fromUsers.GetUserDetailsAction(1));
     this.store.dispatch(new fromUsers.GetAllUsersAction());
   }
 
-  goToDashboard() {
-    this.router.navigate(['users/dashboard']);
+  backToList() {
+    this.router.navigate(['users/list']);
   }
 }

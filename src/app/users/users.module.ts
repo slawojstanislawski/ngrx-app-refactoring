@@ -8,13 +8,15 @@ import {usersRouting} from './users.routing';
 import {UserDetailsComponent} from './components/user-details/user-details.component';
 import {UserDetailsPageComponent} from './containers/user-details-page/user-details-page.component';
 import {UsersListPageComponent} from './containers/users-list-page/users-list-page.component';
+import {DashboardPageComponent} from './containers/dashboard-page/dashboard-page.component';
 
 @NgModule({
   declarations: [
     UsersListComponent,
     UserDetailsComponent,
     UserDetailsPageComponent,
-    UsersListPageComponent
+    UsersListPageComponent,
+    DashboardPageComponent
   ],
   imports: [
     RouterModule,
