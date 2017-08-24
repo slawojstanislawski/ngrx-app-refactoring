@@ -13,11 +13,11 @@ import 'rxjs/add/observable/of';
 export class UsersEffects {
 
   @Effect()
-  getUsers$: Observable<usersActions.Actions> = this.actions$
+  getUsers$: Observable<usersActions.UserAction> = this.actions$
     .ofType(usersActions.ActionTypes.GET_ALL_USERS)
-    .switchMap((action: usersActions.Actions) => this.usersBackend.getAllUsers()
-      .map((response) => new usersActions.GetAllUsersSuccessAction(response))
-      .catch(error => Observable.of(new usersActions.GetAllUsersFailureAction(error)))
+    .switchMap((action: usersActions.UserAction) => this.usersBackend.getAllUsers()
+      .map((response) => usersActions.Actions.GET_ALL_USERS_SUCCESS(response))
+      .catch(error => Observable.of(usersActions.Actions.GET_ALL_USERS_FAILURE(error)))
     );
 
   @Effect({dispatch: false})
@@ -30,11 +30,11 @@ export class UsersEffects {
     ]);
 
   @Effect()
-  getUserDetails$: Observable<usersActions.Actions> = this.actions$
+  getUserDetails$: Observable<usersActions.UserAction> = this.actions$
     .ofType(usersActions.ActionTypes.GET_USER_DETAILS)
-    .switchMap((action: usersActions.Actions) => this.usersBackend.getUserDetails(action.payload)
-      .map((response) => new usersActions.GetUserDetailsSuccessAction(response))
-      .catch(error => Observable.of(new usersActions.GetUserDetailsFailureAction(error)))
+    .switchMap((action: usersActions.UserAction) => this.usersBackend.getUserDetails(action.payload)
+      .map((response) => usersActions.Actions.GET_USER_DETAILS_SUCCESS(response))
+      .catch(error => Observable.of(usersActions.Actions.GET_USER_DETAILS_FAILURE(error)))
     );
 
   @Effect({dispatch: false})

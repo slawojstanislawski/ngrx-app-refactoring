@@ -2,7 +2,7 @@ import * as userActions from './users.actions';
 import {initialUsersState, IUsersState, UsersState} from './users.model';
 import {createSelector, createFeatureSelector} from '@ngrx/store/src';
 
-export function reducer(state: IUsersState = initialUsersState, action: userActions.Actions): IUsersState {
+export function reducer(state: IUsersState = initialUsersState, action: userActions.UserAction): IUsersState {
   switch (action.type) {
     case userActions.ActionTypes.GET_ALL_USERS:
       return new UsersState(state, {

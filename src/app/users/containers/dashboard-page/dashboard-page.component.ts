@@ -28,8 +28,8 @@ export class DashboardPageComponent implements OnInit {
     this.userDetails$ = this.store.select(fromUsers.getUserDetails);
     this.userDetailsLoading$ = this.userEffects.userDetailsLoading$;
     this.userDetailsError$ = this.store.select(fromUsers.getUserDetailsError);
-    this.store.dispatch(new fromUsers.GetUserDetailsAction(1));
-    this.store.dispatch(new fromUsers.GetAllUsersAction());
+    this.store.dispatch(fromUsers.Actions.GET_USER_DETAILS(1));
+    this.store.dispatch(fromUsers.Actions.GET_ALL_USERS());
   }
 
   backToList() {

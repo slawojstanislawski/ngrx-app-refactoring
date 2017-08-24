@@ -22,7 +22,7 @@ export class UsersListPageComponent implements OnInit {
     this.users$ = this.store.select(fromUsers.getUsers);
     this.error$ = this.store.select(fromUsers.getUsersError);
     this.loading$ = this.userEffects.usersLoading$;
-    this.store.dispatch(new fromUsers.GetAllUsersAction());
+    this.store.dispatch(fromUsers.Actions.GET_ALL_USERS());
   }
 
   goToDashboard() {

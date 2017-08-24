@@ -24,7 +24,7 @@ export class UserDetailsPageComponent implements OnInit {
     this.loading$ = this.userEffects.userDetailsLoading$;
     this.error$ = this.store.select(fromUsers.getUserDetailsError);
     const userId = +this.route.snapshot.params['id'];
-    this.store.dispatch(new fromUsers.GetUserDetailsAction(userId));
+    this.store.dispatch(fromUsers.Actions.GET_USER_DETAILS(userId));
   }
 
   backToList() {

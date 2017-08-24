@@ -1,6 +1,6 @@
 import {Action} from '@ngrx/store';
 import {IUser} from './users.model';
-import {type} from '../store-utils';
+import {configureSuccessAndFailureActions, type} from '../store-utils';
 
 export const ActionTypes = {
   GET_ALL_USERS: type('[User] Get All Users'),
@@ -11,52 +11,17 @@ export const ActionTypes = {
   GET_USER_DETAILS_FAILURE: type('[User] Get User Details Failure'),
 };
 
-export class GetAllUsersAction implements Action {
-  type = ActionTypes.GET_ALL_USERS;
-
-  constructor(public payload?: any) {
-  }
+export interface UserAction extends Action {
+  payload?: any;
 }
 
-export class GetAllUsersSuccessAction implements Action {
-  type = ActionTypes.GET_ALL_USERS_SUCCESS;
-
-  constructor(public payload: IUser[]) {
-  }
+export class Actions {
+  @configureSuccessAndFailureActions(ActionTypes)
+  static GET_ALL_USERS: (payload?: any) => UserAction;
+  static GET_ALL_USERS_SUCCESS: (payload: IUser[]) => UserAction;
+  static GET_ALL_USERS_FAILURE: (payload: any) => UserAction;
+  @configureSuccessAndFailureActions(ActionTypes)
+  static GET_USER_DETAILS: (payload: number) => UserAction;
+  static GET_USER_DETAILS_SUCCESS: (payload: IUser) => UserAction;
+  static GET_USER_DETAILS_FAILURE: (payload: any) => UserAction;
 }
-
-export class GetAllUsersFailureAction implements Action {
-  type = ActionTypes.GET_ALL_USERS_FAILURE;
-
-  constructor(public payload: any) {
-  }
-}
-
-export class GetUserDetailsAction implements Action {
-  type = ActionTypes.GET_USER_DETAILS;
-
-  constructor(public payload: number) {
-  }
-}
-
-export class GetUserDetailsSuccessAction implements Action {
-  type = ActionTypes.GET_USER_DETAILS_SUCCESS;
-
-  constructor(public payload: IUser) {
-  }
-}
-
-export class GetUserDetailsFailureAction implements Action {
-  type = ActionTypes.GET_USER_DETAILS_FAILURE;
-
-  constructor(public payload: any) {
-  }
-}
-
-export type Actions
-  = GetAllUsersAction
-  | GetAllUsersSuccessAction
-  | GetAllUsersFailureAction
-  | GetUserDetailsAction
-  | GetUserDetailsSuccessAction
-  | GetUserDetailsFailureAction;
